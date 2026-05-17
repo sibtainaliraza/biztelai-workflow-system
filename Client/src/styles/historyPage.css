@@ -1,0 +1,105 @@
+.history-page {
+
+  padding: 40px;
+
+  background: #f5f7fb;
+
+  min-height: 100vh;
+
+}
+
+.history-page h1 {
+
+  margin-bottom: 30px;
+
+}
+
+.table-wrapper {
+
+  overflow-x: auto;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.1);
+
+  padding: 20px;
+
+}
+
+.history-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+}
+
+.history-table th,
+.history-table td {
+
+  border: 1px solid #ddd;
+
+  padding: 12px;
+
+  text-align: left;
+
+}
+
+.history-table th {
+
+  background: black;
+
+  color: white;
+
+}
+
+.history-table input {
+
+  width: 100%;
+
+  padding: 8px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+}
+
+.issue-input {
+
+  border: 2px solid #ff4d4f !important;
+
+  background: #fff1f0;
+
+  color: #cf1322;
+
+  font-weight: 600;
+
+}
+
+.save-btn {
+
+  background: black;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+}
+
+.save-btn:hover {
+
+  opacity: 0.9;
+
+}

@@ -1,0 +1,116 @@
+.table-wrapper {
+
+  overflow-x: auto;
+
+  margin-top: 20px;
+
+}
+
+.review-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: white;
+
+}
+
+.review-table th,
+.review-table td {
+
+  border: 1px solid #ddd;
+
+  padding: 12px;
+
+  text-align: left;
+
+}
+
+.review-table th {
+
+  background: #111;
+
+  color: white;
+
+}
+
+.review-table input {
+
+  width: 100%;
+
+  padding: 8px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 6px;
+
+}
+
+.confidence-high {
+
+  color: green;
+
+  font-weight: bold;
+
+}
+
+.confidence-medium {
+
+  color: orange;
+
+  font-weight: bold;
+
+}
+
+.confidence-low {
+
+  color: red;
+
+  font-weight: bold;
+
+}
+
+.status-Auto\ Approved {
+
+  color: green;
+
+  font-weight: bold;
+
+}
+
+.status-Needs\ Review {
+
+  color: red;
+
+  font-weight: bold;
+
+}
+
+.save-btn {
+
+  background: black;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+}
+
+.issue-cell {
+
+  background: #fff1f0;
+
+  border: 2px solid #ff4d4f;
+
+  color: #cf1322;
+
+  font-weight: 600;
+
+}
