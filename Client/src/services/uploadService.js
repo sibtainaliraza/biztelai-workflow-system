@@ -1,29 +1,16 @@
 import api from "../api/axios";
 
-export const uploadDocument =
-  async (formData) => {
+export const uploadDocument = async (formData) => {
+  try {
+    const response = await api.post("/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-    try {
-
-      const response =
-        await api.post(
-          "/upload",
-          formData,
-          {
-            headers: {
-              "Content-Type":
-                "multipart/form-data",
-            },
-          }
-        );
-
-      return response.data;
-
-    } catch (error) {
-
-      console.log(error);
-      throw error;
-
-    }
-
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };

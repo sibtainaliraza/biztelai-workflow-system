@@ -1,85 +1,55 @@
-const Record =
-  require("../models/Record");
+const Record = require("../models/Record");
 
-const getRecords =
-  async (req, res) => {
+const getRecords = async (req, res) => {
+  try {
+    const records = await Record.find().sort({ createdAt: -1 });
 
-    try {
+    res.status(200).json({
+      success: true,
 
-      const records =
-        await Record.find()
-          .sort({ createdAt: -1 });
+      records,
+    });
+  } catch (error) {
+    console.log(error);
 
-      res.status(200).json({
+    res.status(500).json({
+      success: false,
 
-        success: true,
-
-        records,
-
-      });
-
-    } catch (error) {
-
-      console.log(error);
-
-      res.status(500).json({
-
-        success: false,
-
-        message: "Server Error",
-
-      });
-
-    }
-
+      message: "Server Error",
+    });
+  }
 };
 
-const updateRecord =
-  async (req, res) => {
+const updateRecord = async (req, res) => {
+  try {
+    const updatedRecord = await Record.findByIdAndUpdate(
+      req.params.id,
 
-    try {
+      req.body,
 
-      const updatedRecord =
-        await Record.findByIdAndUpdate(
+      {
+        new: true,
+      },
+    );
 
-          req.params.id,
+    res.status(200).json({
+      success: true,
 
-          req.body,
+      updatedRecord,
+    });
+  } catch (error) {
+    console.log(error.message);
 
-          {
-            new: true,
-          }
+    res.status(500).json({
+      success: false,
 
-        );
-
-      res.status(200).json({
-
-        success: true,
-
-        updatedRecord,
-
-      });
-
-    } catch (error) {
-
-      console.log(error.message);
-
-      res.status(500).json({
-
-        success: false,
-
-        message: "Server Error",
-
-      });
-
-    }
-
+      message: "Server Error",
+    });
+  }
 };
 
 module.exports = {
-
   getRecords,
 
   updateRecord,
-
 };

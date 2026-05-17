@@ -1,71 +1,45 @@
-const mongoose =
-  require("mongoose");
+const mongoose = require("mongoose");
 
-const issueSchema =
-  new mongoose.Schema({
+const issueSchema = new mongoose.Schema({
+  field: String,
 
-    field: String,
+  issue: String,
 
-    issue: String,
+  severity: String,
+});
 
-    severity: String,
+const recordSchema = new mongoose.Schema(
+  {
+    serialNumber: String,
 
-  });
+    date: String,
 
-const recordSchema =
-  new mongoose.Schema(
+    shift: String,
 
-    {
+    employeeNumber: String,
 
-      serialNumber:
-        String,
+    operationCode: String,
 
-      date:
-        String,
+    machineNumber: String,
 
-      shift:
-        String,
+    workOrderNumber: String,
 
-      employeeNumber:
-        String,
+    quantityProduced: String,
 
-      operationCode:
-        String,
+    timeTakenHours: String,
 
-      machineNumber:
-        String,
+    confidence: String,
 
-      workOrderNumber:
-        String,
+    status: String,
 
-      quantityProduced:
-        String,
+    issues: [issueSchema],
 
-      timeTakenHours:
-        String,
+    uploadedFile: String,
+  },
 
-      confidence:
-        String,
+  {
+    timestamps: true,
+  },
+);
 
-      status:
-        String,
-
-      issues:
-        [issueSchema],
-
-      uploadedFile:
-        String,
-
-    },
-
-    {
-      timestamps: true,
-    }
-
-  );
-
-module.exports =
-  mongoose.model(
-    "Record",
-    recordSchema
-  );
+module.exports = mongoose.model("Record", recordSchema);

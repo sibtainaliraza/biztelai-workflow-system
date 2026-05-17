@@ -1,27 +1,17 @@
 import api from "../api/axios";
 
-export const getRecords =
-  async () => {
+export const getRecords = async () => {
+  const response = await api.get("/records");
 
-    const response =
-      await api.get("/records");
-
-    return response.data;
-
+  return response.data;
 };
 
-export const updateRecord =
-  async (id, updatedData) => {
+export const updateRecord = async (id, updatedData) => {
+  const response = await api.put(
+    `/records/${id}`,
 
-    const response =
-      await api.put(
+    updatedData,
+  );
 
-        `/records/${id}`,
-
-        updatedData
-
-      );
-
-    return response.data;
-
+  return response.data;
 };

@@ -1,27 +1,15 @@
-const express =
-  require("express");
+const express = require("express");
 
-const router =
-  express.Router();
+const router = express.Router();
 
 const {
-
   getRecords,
 
   updateRecord,
+} = require("../controllers/recordController");
 
-} = require(
-  "../controllers/recordController"
-);
+router.get("/", getRecords);
 
-router.get(
-  "/",
-  getRecords
-);
-
-router.put(
-  "/:id",
-  updateRecord
-);
+router.put("/:id", updateRecord);
 
 module.exports = router;

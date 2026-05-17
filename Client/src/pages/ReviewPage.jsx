@@ -1,32 +1,15 @@
 import "../styles/reviewTable.css";
 
-const ReviewTable = ({
-  records,
-}) => {
-
-  if (
-    !records ||
-    records.length === 0
-  ) {
-
-    return (
-      <p>
-        No records found
-      </p>
-    );
-
+const ReviewTable = ({ records }) => {
+  if (!records || records.length === 0) {
+    return <p>No records found</p>;
   }
 
   return (
-
     <div className="table-wrapper">
-
       <table className="review-table">
-
         <thead>
-
           <tr>
-
             <th>S.No</th>
 
             <th>Date</th>
@@ -50,205 +33,71 @@ const ReviewTable = ({
             <th>Status</th>
 
             <th>Issues</th>
-
           </tr>
-
         </thead>
 
         <tbody>
+          {records.map((record, index) => (
+            <tr key={index}>
+              <td>
+                <input type="text" defaultValue={record.serialNumber} />
+              </td>
 
-          {
-            records.map(
-              (
-                record,
-                index
-              ) => (
+              <td>
+                <input type="text" defaultValue={record.date} />
+              </td>
 
-                <tr
-                  key={index}
-                >
+              <td>
+                <input type="text" defaultValue={record.shift} />
+              </td>
 
-                  <td>
+              <td>
+                <input type="text" defaultValue={record.employeeNumber} />
+              </td>
 
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.serialNumber
-                      }
-                    />
+              <td>
+                <input type="text" defaultValue={record.operationCode} />
+              </td>
 
-                  </td>
+              <td>
+                <input type="text" defaultValue={record.machineNumber} />
+              </td>
 
-                  <td>
+              <td>
+                <input type="text" defaultValue={record.workOrderNumber} />
+              </td>
 
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.date
-                      }
-                    />
+              <td>
+                <input type="text" defaultValue={record.quantityProduced} />
+              </td>
 
-                  </td>
+              <td>
+                <input type="text" defaultValue={record.timeTakenHours} />
+              </td>
 
-                  <td>
+              <td className={`confidence-${record.confidence}`}>
+                {record.confidence}
+              </td>
 
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.shift
-                      }
-                    />
+              <td className={`status-${record.status}`}>{record.status}</td>
 
-                  </td>
-
-                  <td>
-
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.employeeNumber
-                      }
-                    />
-
-                  </td>
-
-                  <td>
-
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.operationCode
-                      }
-                    />
-
-                  </td>
-
-                  <td>
-
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.machineNumber
-                      }
-                    />
-
-                  </td>
-
-                  <td>
-
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.workOrderNumber
-                      }
-                    />
-
-                  </td>
-
-                  <td>
-
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.quantityProduced
-                      }
-                    />
-
-                  </td>
-
-                  <td>
-
-                    <input
-                      type="text"
-                      defaultValue={
-                        record.timeTakenHours
-                      }
-                    />
-
-                  </td>
-
-                  <td
-                    className={`confidence-${record.confidence}`}
-                  >
-
-                    {
-                      record.confidence
-                    }
-
-                  </td>
-
-                  <td
-                    className={`status-${record.status}`}
-                  >
-
-                    {
-                      record.status
-                    }
-
-                  </td>
-
-                  <td>
-
-                    {
-                      record.issues &&
-                      record.issues.length > 0 ? (
-
-                        <ul>
-
-                          {
-                            record.issues.map(
-                              (
-                                issue,
-                                i
-                              ) => (
-
-                                <li
-                                  key={i}
-                                >
-
-                                  ⚠️
-                                  {" "}
-
-                                  {
-                                    issue.issue
-                                  }
-
-                                </li>
-
-                              )
-                            )
-                          }
-
-                        </ul>
-
-                      ) : (
-
-                        <span>
-
-                          No Issues
-
-                        </span>
-
-                      )
-                    }
-
-                  </td>
-
-                </tr>
-
-              )
-            )
-          }
-
+              <td>
+                {record.issues && record.issues.length > 0 ? (
+                  <ul>
+                    {record.issues.map((issue, i) => (
+                      <li key={i}>⚠️ {issue.issue}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span>No Issues</span>
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
-
       </table>
-
     </div>
-
   );
-
 };
 
-export default
-  ReviewTable;
+export default ReviewTable;
