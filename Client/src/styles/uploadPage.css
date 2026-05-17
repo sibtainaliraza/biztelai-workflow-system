@@ -1,49 +1,44 @@
+/* Upload Page Layout */
 .page-container {
-
   padding: 40px;
 
   background-color: #f5f7fb;
 
   min-height: 100vh;
-
 }
 
+/* Upload Section Card */
 .upload-card {
-
   background: white;
 
   padding: 30px;
 
   border-radius: 12px;
 
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   margin-bottom: 30px;
-
 }
 
+/* Upload Page Heading */
 .upload-card h1 {
-
   margin-bottom: 10px;
-
 }
 
+/* Subtitle Text */
 .subtitle {
-
   color: gray;
 
   margin-bottom: 20px;
-
 }
 
+/* File Input */
 .upload-card input {
-
   margin-bottom: 20px;
-
 }
 
+/* Upload Button */
 .upload-card button {
-
   display: block;
 
   background: black;
@@ -59,41 +54,37 @@
   cursor: pointer;
 
   font-size: 16px;
-
 }
 
+/* Content Section Card */
 .section-card {
-
   background: white;
 
   padding: 25px;
 
   border-radius: 12px;
 
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   margin-bottom: 30px;
-
 }
 
+/* OCR Output Text */
 .ocr-output {
-
   white-space: pre-wrap;
 
   font-size: 14px;
 
   line-height: 1.5;
-
 }
 
+/* File Preview Container */
 .preview-box {
-
   margin: 20px 0;
-
 }
 
+/* Image Preview */
 .file-preview {
-
   width: 100%;
 
   max-height: 400px;
@@ -105,11 +96,10 @@
   border: 1px solid #ddd;
 
   background: #fafafa;
-
 }
 
+/* PDF Preview */
 .pdf-preview {
-
   width: 100%;
 
   height: 500px;
@@ -119,5 +109,4 @@
   border-radius: 12px;
 
   background: white;
-
 }

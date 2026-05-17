@@ -1,8 +1,9 @@
 const Record = require("../models/Record");
 
+// Generate dashboard analytics and workflow statistics
 const getDashboardStats = async (req, res) => {
   try {
-    // Basic Stats
+    // Core workflow statistics
     const totalRecords = await Record.countDocuments();
 
     const needsReview = await Record.countDocuments({
@@ -13,10 +14,10 @@ const getDashboardStats = async (req, res) => {
       status: "Auto Approved",
     });
 
-    // Machine Count
+    // Total unique machines processed
     const machineCount = await Record.distinct("machineNumber");
 
-    // Shift-wise Summary
+    // Shift-wise workflow summary
     const shiftSummary = await Record.aggregate([
       {
         $group: {
@@ -29,7 +30,7 @@ const getDashboardStats = async (req, res) => {
       },
     ]);
 
-    // Quantity Summary
+    // Total production quantity summary
     const quantitySummary = await Record.aggregate([
       {
         $group: {
@@ -52,7 +53,7 @@ const getDashboardStats = async (req, res) => {
       },
     ]);
 
-    // Machine-wise Summary
+    // Machine-wise workflow summary
     const machineSummary = await Record.aggregate([
       {
         $group: {
@@ -65,6 +66,7 @@ const getDashboardStats = async (req, res) => {
       },
     ]);
 
+    // Send dashboard response
     res.status(200).json({
       success: true,
 

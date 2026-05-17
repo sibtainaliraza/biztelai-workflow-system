@@ -6,6 +6,7 @@ const upload = require("../middleware/uploadMiddleware");
 
 const { uploadDocument } = require("../controllers/uploadController");
 
+// Document upload and AI processing route
 router.post("/", upload.single("document"), uploadDocument);
 
 module.exports = router;

@@ -1,5 +1,5 @@
+/* Navigation Bar */
 .navbar {
-
   display: flex;
 
   justify-content: space-between;
@@ -11,23 +11,20 @@
   background: black;
 
   color: white;
-
 }
 
+/* Navigation Links Container */
 .nav-links {
-
   display: flex;
 
   gap: 20px;
-
 }
 
+/* Navigation Links */
 .nav-links a {
-
   color: white;
 
   text-decoration: none;
 
   font-weight: bold;
-
 }

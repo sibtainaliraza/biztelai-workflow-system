@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 
 import "../../styles/navbar.css";
 
+// Application Navigation Bar
 const Navbar = () => {
   return (
     <nav className="navbar">
       <h2>BiztelAI</h2>
 
+      {/* Navigation Links */}
       <div className="nav-links">
         <Link to="/">Upload</Link>
 

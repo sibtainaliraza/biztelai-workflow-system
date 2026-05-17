@@ -1,8 +1,12 @@
 const Record = require("../models/Record");
 
+// Fetch all workflow records
 const getRecords = async (req, res) => {
   try {
-    const records = await Record.find().sort({ createdAt: -1 });
+    // Retrieve latest records first
+    const records = await Record.find().sort({
+      createdAt: -1,
+    });
 
     res.status(200).json({
       success: true,
@@ -20,6 +24,7 @@ const getRecords = async (req, res) => {
   }
 };
 
+// Update a workflow record
 const updateRecord = async (req, res) => {
   try {
     const updatedRecord = await Record.findByIdAndUpdate(

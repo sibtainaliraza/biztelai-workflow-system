@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Validation issue schema
 const issueSchema = new mongoose.Schema({
   field: String,
 
@@ -8,6 +9,7 @@ const issueSchema = new mongoose.Schema({
   severity: String,
 });
 
+// Manufacturing workflow record schema
 const recordSchema = new mongoose.Schema(
   {
     serialNumber: String,

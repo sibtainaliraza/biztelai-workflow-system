@@ -1,5 +1,6 @@
 import "../styles/reviewTable.css";
 
+// Displays extracted and validated manufacturing records
 const ReviewTable = ({ records }) => {
   if (!records || records.length === 0) {
     return <p>No records found</p>;
@@ -8,34 +9,25 @@ const ReviewTable = ({ records }) => {
   return (
     <div className="table-wrapper">
       <table className="review-table">
+        {/* Table Structure */}
         <thead>
           <tr>
             <th>S.No</th>
-
             <th>Date</th>
-
             <th>Shift</th>
-
             <th>Emp. No</th>
-
             <th>Opn Code</th>
-
             <th>Machine No</th>
-
             <th>Work Order</th>
-
             <th>Qty. Prod.</th>
-
             <th>Time (hrs)</th>
-
             <th>Confidence</th>
-
             <th>Status</th>
-
             <th>Issues</th>
           </tr>
         </thead>
 
+        {/* Record Rows */}
         <tbody>
           {records.map((record, index) => (
             <tr key={index}>
@@ -81,6 +73,7 @@ const ReviewTable = ({ records }) => {
 
               <td className={`status-${record.status}`}>{record.status}</td>
 
+              {/* Validation Issues */}
               <td>
                 {record.issues && record.issues.length > 0 ? (
                   <ul>

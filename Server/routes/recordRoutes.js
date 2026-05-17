@@ -8,6 +8,7 @@ const {
   updateRecord,
 } = require("../controllers/recordController");
 
+// Workflow records routes
 router.get("/", getRecords);
 
 router.put("/:id", updateRecord);

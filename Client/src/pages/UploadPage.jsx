@@ -1,24 +1,21 @@
 import { useState } from "react";
 
 import { uploadDocument } from "../services/uploadService";
-
 import ReviewTable from "../components/review/ReviewTable";
 
 import "../styles/uploadPage.css";
 
 const UploadPage = () => {
+  // Component state
   const [file, setFile] = useState(null);
-
   const [preview, setPreview] = useState(null);
-
   const [loading, setLoading] = useState(false);
-
   const [result, setResult] = useState(null);
 
+  // Upload document and process with AI
   const handleUpload = async () => {
     if (!file) {
       alert("Please select a file");
-
       return;
     }
 
@@ -26,7 +23,6 @@ const UploadPage = () => {
       setLoading(true);
 
       const formData = new FormData();
-
       formData.append("document", file);
 
       const data = await uploadDocument(formData);
@@ -34,7 +30,6 @@ const UploadPage = () => {
       setResult(data);
     } catch (error) {
       console.log(error);
-
       alert("Upload failed");
     } finally {
       setLoading(false);
@@ -43,11 +38,13 @@ const UploadPage = () => {
 
   return (
     <div className="page-container">
+      {/* Upload Section */}
       <div className="upload-card">
         <h1>BiztelAI Workflow System</h1>
 
         <p className="subtitle">AI-Powered Manufacturing Document Processing</p>
 
+        {/* File Upload */}
         <input
           type="file"
           accept="image/*,.pdf"
@@ -62,6 +59,7 @@ const UploadPage = () => {
           }}
         />
 
+        {/* File Preview */}
         {preview && (
           <div className="preview-box">
             {file.type.includes("image") ? (
@@ -81,6 +79,7 @@ const UploadPage = () => {
         </button>
       </div>
 
+      {/* Extraction Results */}
       {result && (
         <>
           <div className="section-card">

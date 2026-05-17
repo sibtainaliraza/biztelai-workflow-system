@@ -1,5 +1,7 @@
+/* Global Page Styles */
 body {
   margin: 0;
+
   padding: 0;
 
   font-family: Arial, sans-serif;
@@ -7,6 +9,7 @@ body {
   background-color: #f5f5f5;
 }
 
+/* Global Button Styles */
 button {
   padding: 10px 16px;
 
@@ -21,10 +24,12 @@ button {
   border-radius: 6px;
 }
 
+/* Button Hover Effect */
 button:hover {
   opacity: 0.9;
 }
 
+/* Global Input Styles */
 input {
   padding: 8px;
 }

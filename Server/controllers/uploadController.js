@@ -4,8 +4,10 @@ const validationService = require("../services/validationService");
 
 const Record = require("../models/Record");
 
+// Upload and process manufacturing document
 const uploadDocument = async (req, res) => {
   try {
+    // Validate uploaded file
     if (!req.file) {
       return res.status(400).json({
         success: false,
@@ -14,13 +16,13 @@ const uploadDocument = async (req, res) => {
       });
     }
 
-    // Gemini AI extraction
+    // Extract records using Gemini AI
     const extractedRecords = await geminiService(req.file.path);
 
-    // Validation
+    // Validate extracted records
     const validatedRecords = await validationService(extractedRecords);
 
-    // Save to MongoDB
+    // Store validated records in MongoDB
     await Record.insertMany(
       validatedRecords.map((record) => ({
         ...record,
@@ -29,6 +31,7 @@ const uploadDocument = async (req, res) => {
       })),
     );
 
+    // Send success response
     res.status(200).json({
       success: true,
 

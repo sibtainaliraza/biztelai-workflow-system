@@ -2,11 +2,12 @@ const multer = require("multer");
 
 const fs = require("fs");
 
-// Ensure uploads folder exists
+// Ensure uploads directory exists
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads");
 }
 
+// Configure file storage settings
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -21,6 +22,7 @@ const storage = multer.diskStorage({
   },
 });
 
+// Multer upload middleware
 const upload = multer({
   storage,
 });

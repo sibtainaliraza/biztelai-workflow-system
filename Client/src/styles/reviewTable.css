@@ -1,42 +1,38 @@
+/* Table Container */
 .table-wrapper {
-
   overflow-x: auto;
 
   margin-top: 20px;
-
 }
 
+/* Review Table */
 .review-table {
-
   width: 100%;
 
   border-collapse: collapse;
 
   background: white;
-
 }
 
+/* Table Cells */
 .review-table th,
 .review-table td {
-
   border: 1px solid #ddd;
 
   padding: 12px;
 
   text-align: left;
-
 }
 
+/* Table Header */
 .review-table th {
-
   background: #111;
 
   color: white;
-
 }
 
+/* Editable Input Fields */
 .review-table input {
-
   width: 100%;
 
   padding: 8px;
@@ -44,51 +40,42 @@
   border: 1px solid #ccc;
 
   border-radius: 6px;
-
 }
 
+/* AI Confidence Indicators */
 .confidence-high {
-
   color: green;
 
   font-weight: bold;
-
 }
 
 .confidence-medium {
-
   color: orange;
 
   font-weight: bold;
-
 }
 
 .confidence-low {
-
   color: red;
 
   font-weight: bold;
-
 }
 
+/* Record Status Indicators */
 .status-Auto\ Approved {
-
   color: green;
 
   font-weight: bold;
-
 }
 
 .status-Needs\ Review {
-
   color: red;
 
   font-weight: bold;
-
 }
 
+/* Save Button */
 .save-btn {
-
   background: black;
 
   color: white;
@@ -100,11 +87,10 @@
   border-radius: 8px;
 
   cursor: pointer;
-
 }
 
+/* Validation Error Highlight */
 .issue-cell {
-
   background: #fff1f0;
 
   border: 2px solid #ff4d4f;
@@ -112,5 +98,4 @@
   color: #cf1322;
 
   font-weight: 600;
-
 }

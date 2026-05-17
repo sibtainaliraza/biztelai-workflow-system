@@ -4,33 +4,35 @@ import { getRecords, updateRecord } from "../services/recordService";
 
 import "../styles/historyPage.css";
 
+// Review and validation workflow page
 const HistoryPage = () => {
+  // Component state
   const [records, setRecords] = useState([]);
-
   const [search, setSearch] = useState("");
-
   const [statusFilter, setStatusFilter] = useState("");
-
   const [shiftFilter, setShiftFilter] = useState("");
 
+  // Check whether a field contains validation issues
   const hasIssue = (record, field) => {
     return record.issues?.some((issue) => issue.field === field);
   };
 
+  // Load records on initial render
   useEffect(() => {
     fetchRecords();
   }, []);
 
+  // Fetch workflow records
   const fetchRecords = async () => {
     try {
       const data = await getRecords();
-
       setRecords(data.records);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // Handle inline table edits
   const handleChange = (index, field, value) => {
     const updatedRecords = [...records];
 
@@ -39,6 +41,7 @@ const HistoryPage = () => {
     setRecords(updatedRecords);
   };
 
+  // Save updated record
   const handleSave = async (recordId, record) => {
     try {
       await updateRecord(recordId, record);
@@ -51,6 +54,7 @@ const HistoryPage = () => {
     }
   };
 
+  // Search and filter logic
   const filteredRecords = records.filter((record) => {
     const matchesSearch =
       record.machineNumber?.toLowerCase().includes(search.toLowerCase()) ||
@@ -69,6 +73,7 @@ const HistoryPage = () => {
     <div className="history-page">
       <h1>Review Workflow</h1>
 
+      {/* Search Input */}
       <input
         type="text"
         placeholder="Search by Machine, Employee, Work Order, Operation Code"
@@ -77,15 +82,14 @@ const HistoryPage = () => {
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      {/* Filters */}
       <div className="filter-row">
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
           <option value="">All Status</option>
-
           <option value="Needs Review">Needs Review</option>
-
           <option value="Auto Approved">Auto Approved</option>
         </select>
 
@@ -94,41 +98,28 @@ const HistoryPage = () => {
           onChange={(e) => setShiftFilter(e.target.value)}
         >
           <option value="">All Shifts</option>
-
           <option value="I">Shift I</option>
-
           <option value="II">Shift II</option>
-
           <option value="III">Shift III</option>
         </select>
       </div>
 
+      {/* Workflow Records Table */}
       <div className="table-wrapper">
         <table className="history-table">
           <thead>
             <tr>
               <th>S.No</th>
-
               <th>Date</th>
-
               <th>Shift</th>
-
               <th>Emp. No</th>
-
               <th>Opn Code</th>
-
               <th>Machine</th>
-
               <th>Work Order</th>
-
               <th>Qty</th>
-
               <th>Time</th>
-
               <th>Status</th>
-
               <th>Document</th>
-
               <th>Action</th>
             </tr>
           </thead>
