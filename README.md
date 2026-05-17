@@ -169,7 +169,7 @@ npm install
 Create a `.env` file inside `Server/`
 
 ```env
-PORT=5000
+PORT=your_port
 
 MONGO_URI=your_mongodb_connection_string
 
@@ -187,7 +187,7 @@ npm run dev
 Backend runs on:
 
 ```bash
-http://localhost:5000
+your_port
 ```
 
 ---
