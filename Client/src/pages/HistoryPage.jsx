@@ -542,7 +542,7 @@ const HistoryPage = () => {
 
                       <a
 
-                        href={`http://localhost:5000/uploads/${record.uploadedFile}`}
+                        href={`${import.meta.env.VITE_API_URL}/uploads/${record.uploadedFile}`}
 
                         target="_blank"
 
