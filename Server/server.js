@@ -21,7 +21,18 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(
+
+  cors({
+
+    origin:
+      "https://biztelai-workflow-system.netlify.app",
+
+    credentials: true,
+
+  })
+
+);
 app.use(express.json());
 
 // Routes

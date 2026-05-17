@@ -1,15 +1,70 @@
-const multer = require("multer");
+const multer =
+  require("multer");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
+const fs =
+  require("fs");
 
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
+// Ensure uploads folder exists
+if (
+  !fs.existsSync("uploads")
+) {
 
-const upload = multer({ storage });
+  fs.mkdirSync(
+    "uploads"
+  );
 
-module.exports = upload;
+}
+
+const storage =
+  multer.diskStorage({
+
+    destination:
+      function (
+        req,
+        file,
+        cb
+      ) {
+
+        cb(
+          null,
+          "uploads/"
+        );
+
+      },
+
+    filename:
+      function (
+        req,
+        file,
+        cb
+      ) {
+
+        cb(
+
+          null,
+
+          Date.now()
+
+          +
+
+          "-"
+
+          +
+
+          file.originalname
+
+        );
+
+      },
+
+  });
+
+const upload =
+  multer({
+
+    storage,
+
+  });
+
+module.exports =
+  upload;
