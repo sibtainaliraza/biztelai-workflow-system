@@ -21,8 +21,10 @@ const HistoryPage = () => {
   const isDuplicateWorkOrder = (currentRecord) => {
     return (
       records.filter(
-        (record) => record.workOrderNumber === currentRecord.workOrderNumber,
-      ).length > 1
+        (record) =>
+          record.workOrderNumber === currentRecord.workOrderNumber &&
+          record._id !== currentRecord._id,
+      ).length > 0
     );
   };
 
@@ -54,28 +56,68 @@ const HistoryPage = () => {
   // Save updated record
   const handleSave = async (recordId, record) => {
     try {
-      // Remove resolved issues
-      const updatedIssues =
-        record.issues?.filter((issue) => {
-          if (issue.field === "employeeNumber" && record.employeeNumber)
-            return false;
+      const updatedIssues = [];
 
-          if (issue.field === "operationCode" && record.operationCode)
-            return false;
+      // Employee validation
+      if (!record.employeeNumber || record.employeeNumber.length < 3) {
+        updatedIssues.push({
+          field: "employeeNumber",
 
-          if (issue.field === "machineNumber" && record.machineNumber)
-            return false;
+          issue: "Invalid employee number",
+        });
+      }
 
-          if (issue.field === "quantityProduced" && record.quantityProduced)
-            return false;
+      // Operation code validation
+      if (!record.operationCode || record.operationCode.length < 2) {
+        updatedIssues.push({
+          field: "operationCode",
 
-          if (issue.field === "timeTakenHours" && record.timeTakenHours)
-            return false;
+          issue: "Invalid operation code",
+        });
+      }
 
-          return true;
-        }) || [];
+      // Machine validation
+      if (!record.machineNumber || record.machineNumber.length < 2) {
+        updatedIssues.push({
+          field: "machineNumber",
 
-      // Update status automatically
+          issue: "Invalid machine number",
+        });
+      }
+
+      // Quantity validation
+      if (!record.quantityProduced || Number(record.quantityProduced) <= 0) {
+        updatedIssues.push({
+          field: "quantityProduced",
+
+          issue: "Invalid quantity value",
+        });
+      }
+
+      // Time validation
+      if (!record.timeTakenHours || Number(record.timeTakenHours) <= 0) {
+        updatedIssues.push({
+          field: "timeTakenHours",
+
+          issue: "Invalid time value",
+        });
+      }
+
+      // Duplicate work order validation
+      const duplicateWorkOrders = records.filter(
+        (r) =>
+          r.workOrderNumber === record.workOrderNumber && r._id !== record._id,
+      );
+
+      if (duplicateWorkOrders.length > 0) {
+        updatedIssues.push({
+          field: "workOrderNumber",
+
+          issue: "Duplicate work order number",
+        });
+      }
+
+      // Final updated record
       const updatedRecord = {
         ...record,
 
@@ -84,7 +126,7 @@ const HistoryPage = () => {
         status: updatedIssues.length === 0 ? "Auto Approved" : "Needs Review",
       };
 
-      // Save updated record
+      // Save to backend
       await updateRecord(recordId, updatedRecord);
 
       // Update frontend state
@@ -246,7 +288,10 @@ const HistoryPage = () => {
                 <td>
                   <input
                     className={
-                      isDuplicateWorkOrder(record) ? "duplicate-input" : ""
+                      hasIssue(record, "workOrderNumber") ||
+                      isDuplicateWorkOrder(record)
+                        ? "duplicate-input"
+                        : ""
                     }
                     value={record.workOrderNumber || ""}
                     onChange={(e) =>
