@@ -17,6 +17,15 @@ const HistoryPage = () => {
     return record.issues?.some((issue) => issue.field === field);
   };
 
+  // Check duplicate work order numbers
+  const isDuplicateWorkOrder = (currentRecord) => {
+    return (
+      records.filter(
+        (record) => record.workOrderNumber === currentRecord.workOrderNumber,
+      ).length > 1
+    );
+  };
+
   // Load records on initial render
   useEffect(() => {
     fetchRecords();
@@ -26,6 +35,7 @@ const HistoryPage = () => {
   const fetchRecords = async () => {
     try {
       const data = await getRecords();
+
       setRecords(data.records);
     } catch (error) {
       console.log(error);
@@ -44,7 +54,45 @@ const HistoryPage = () => {
   // Save updated record
   const handleSave = async (recordId, record) => {
     try {
-      await updateRecord(recordId, record);
+      // Remove resolved issues
+      const updatedIssues =
+        record.issues?.filter((issue) => {
+          if (issue.field === "employeeNumber" && record.employeeNumber)
+            return false;
+
+          if (issue.field === "operationCode" && record.operationCode)
+            return false;
+
+          if (issue.field === "machineNumber" && record.machineNumber)
+            return false;
+
+          if (issue.field === "quantityProduced" && record.quantityProduced)
+            return false;
+
+          if (issue.field === "timeTakenHours" && record.timeTakenHours)
+            return false;
+
+          return true;
+        }) || [];
+
+      // Update status automatically
+      const updatedRecord = {
+        ...record,
+
+        issues: updatedIssues,
+
+        status: updatedIssues.length === 0 ? "Auto Approved" : "Needs Review",
+      };
+
+      // Save updated record
+      await updateRecord(recordId, updatedRecord);
+
+      // Update frontend state
+      const updatedRecords = records.map((r) =>
+        r._id === recordId ? updatedRecord : r,
+      );
+
+      setRecords(updatedRecords);
 
       alert("Record updated successfully");
     } catch (error) {
@@ -89,7 +137,9 @@ const HistoryPage = () => {
           onChange={(e) => setStatusFilter(e.target.value)}
         >
           <option value="">All Status</option>
+
           <option value="Needs Review">Needs Review</option>
+
           <option value="Auto Approved">Auto Approved</option>
         </select>
 
@@ -98,8 +148,11 @@ const HistoryPage = () => {
           onChange={(e) => setShiftFilter(e.target.value)}
         >
           <option value="">All Shifts</option>
+
           <option value="I">Shift I</option>
+
           <option value="II">Shift II</option>
+
           <option value="III">Shift III</option>
         </select>
       </div>
@@ -192,6 +245,9 @@ const HistoryPage = () => {
 
                 <td>
                   <input
+                    className={
+                      isDuplicateWorkOrder(record) ? "duplicate-input" : ""
+                    }
                     value={record.workOrderNumber || ""}
                     onChange={(e) =>
                       handleChange(index, "workOrderNumber", e.target.value)
